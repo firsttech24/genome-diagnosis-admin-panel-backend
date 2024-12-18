@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 import ContactUsDetailsModel from "../models/ContactUsDetailsModel.js";
 
 class ContactUsDetailsController {
@@ -30,6 +32,15 @@ class ContactUsDetailsController {
   static async updateContactUsDetails(req, res) {
     try {
       const { id, phoneNumber, address } = req.body;
+
+      if (!id) {
+        res.status(400).json({ message: "Id is required" });
+        return;
+      }
+
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ message: "Invalid ID format" });
+      }
 
       const contactUsDetails = await ContactUsDetailsModel.findOneAndUpdate(
         { _id: id },

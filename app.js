@@ -4,6 +4,7 @@ dotenv.config();
 
 import connectDB from "./db/connectDB.js";
 import contactUsDetailsRoutes from "./routes/contactUsDetailsRoutes.js";
+import partnersRoutes from "./routes/partnersRoutes.js";
 
 const app = express();
 const port = process.env.PORT;
@@ -17,6 +18,7 @@ connectDB(DB_URL);
 
 // routes
 app.use(contactUsDetailsRoutes);
+app.use(partnersRoutes);
 
 app.listen(port, () => {
   console.log("http://localhost:" + port);
