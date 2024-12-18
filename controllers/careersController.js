@@ -95,3 +95,5 @@ class CareersController {
     }
   }
 }
+
+export default CareersController;
