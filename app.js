@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
+import cors from "cors";
 
 import connectDB from "./db/connectDB.js";
 import contactUsDetailsRoutes from "./routes/contactUsDetailsRoutes.js";
@@ -14,6 +15,7 @@ const port = process.env.PORT;
 
 // middleware
 app.use(express.json());
+app.use(cors());
 
 // db connection
 const DB_URL = process.env.DB_URL;
