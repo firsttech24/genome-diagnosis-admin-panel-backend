@@ -11,7 +11,7 @@ import testimonialsRoutes from "./routes/testimonialsRoutes.js";
 import careersRoutes from "./routes/careersRoutes.js";
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 80;
 
 // middleware
 app.use(express.json());
