@@ -9,6 +9,7 @@ import partnersRoutes from "./routes/partnersRoutes.js";
 import teamRoutes from "./routes/teamRoutes.js";
 import testimonialsRoutes from "./routes/testimonialsRoutes.js";
 import careersRoutes from "./routes/careersRoutes.js";
+import blogsRoutes from "./routes/blogsRoutes.js";
 
 const app = express();
 const port = process.env.PORT || 80;
@@ -27,6 +28,7 @@ app.use(partnersRoutes);
 app.use(teamRoutes);
 app.use(testimonialsRoutes);
 app.use(careersRoutes);
+app.use(blogsRoutes);
 
 app.listen(port, () => {
   console.log("http://localhost:" + port);

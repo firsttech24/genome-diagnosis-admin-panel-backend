@@ -10,8 +10,8 @@ router
     next();
   })
   .get(CareersController.getCareers)
-  .post(CareersController.createCareers)
-  .patch(CareersController.updateCareers)
-  .delete(CareersController.deleteCareers);
+  .post(CareersController.createCareer)
+  .patch(CareersController.updateCareer)
+  .delete(CareersController.deleteCareer);
 
 export default router;

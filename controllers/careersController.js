@@ -16,35 +16,68 @@ class CareersController {
     }
   }
 
-  // create careers
-  static async createCareers(req, res) {
+  // create career
+  static async createCareer(req, res) {
     try {
-      const { title, thumbnailImage, requirements } = req.body;
+      const {
+        photo,
+        designation,
+        description,
+        location,
+        experience,
+        salary,
+        skills,
+        qualification,
+      } = req.body;
 
-      if (!title || !thumbnailImage || !requirements) {
+      if (
+        !photo ||
+        !designation ||
+        !description ||
+        !location ||
+        !experience ||
+        !salary ||
+        !skills ||
+        !qualification
+      ) {
         res.status(400).json({ message: "All fields are required" });
         return;
       }
 
-      const careers = await CareersModel.create({
-        title,
-        thumbnailImage,
-        requirements,
+      const newCareer = await CareersModel.create({
+        photo,
+        designation,
+        description,
+        location,
+        experience,
+        salary,
+        skills,
+        qualification,
       });
 
       res.status(200).json({
-        message: "Careers created successfully",
-        data: careers,
+        message: "Career created successfully",
+        data: newCareer,
       });
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
   }
 
-  // update careers
-  static async updateCareers(req, res) {
+  // update career
+  static async updateCareer(req, res) {
     try {
-      const { id, title, thumbnailImage, requirements } = req.body;
+      const {
+        id,
+        photo,
+        designation,
+        description,
+        location,
+        experience,
+        salary,
+        skills,
+        qualification,
+      } = req.body;
 
       if (!id) {
         res.status(400).json({ message: "Id is required" });
@@ -57,12 +90,21 @@ class CareersController {
 
       const result = await CareersModel.findOneAndUpdate(
         { _id: id },
-        { title, thumbnailImage, requirements },
+        {
+          photo,
+          designation,
+          description,
+          location,
+          experience,
+          salary,
+          skills,
+          qualification,
+        },
         { new: true, runValidators: true }
       );
 
       res.status(400).json({
-        message: "Careers updated successfully",
+        message: "Career updated successfully",
         data: result,
       });
     } catch (err) {
@@ -70,8 +112,8 @@ class CareersController {
     }
   }
 
-  // delete careers
-  static async deleteCareers(req, res) {
+  // delete career
+  static async deleteCareer(req, res) {
     try {
       const { id } = req.body;
 
@@ -87,7 +129,7 @@ class CareersController {
       const result = await CareersModel.findOneAndDelete({ _id: id });
 
       res.status(200).json({
-        message: "Careers deleted successfully",
+        message: "Career deleted successfully",
         data: result,
       });
     } catch (err) {
