@@ -11,6 +11,7 @@ import testimonialsRoutes from "./routes/testimonialsRoutes.js";
 import careersRoutes from "./routes/careersRoutes.js";
 import blogsRoutes from "./routes/blogsRoutes.js";
 import eventsRoutes from "./routes/eventsRoutes.js";
+import newsRoutes from "./routes/newsRoutes.js";
 
 const app = express();
 const port = process.env.PORT || 80;
@@ -31,6 +32,7 @@ app.use(testimonialsRoutes);
 app.use(careersRoutes);
 app.use(blogsRoutes);
 app.use(eventsRoutes);
+app.use(newsRoutes);
 
 app.listen(port, () => {
   console.log("http://localhost:" + port);
