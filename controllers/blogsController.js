@@ -16,25 +16,25 @@ class BlogsController {
     }
   }
 
-  // create blogs
+  // create blog
   static async createBlog(req, res) {
     try {
-      const { title, thumbnailImage, description } = req.body;
+      const { photo, name, designation, testimonial } = req.body;
 
-      if (!title || !thumbnailImage || !description) {
-        res.status(400).json({ message: "All fields are required" });
-        return;
+      if (!photo || !name || !designation || !testimonial) {
+        return res.status(400).json({ message: "All fields are required" });
       }
 
-      const blogs = await BlogsModel.create({
-        title,
-        thumbnailImage,
-        description,
+      const newBlog = await BlogsModel.create({
+        photo,
+        name,
+        designation,
+        testimonial,
       });
 
       res.status(200).json({
-        message: "blogs created successfully",
-        data: blogs,
+        message: "blog created successfully",
+        data: newBlog,
       });
     } catch (err) {
       res.status(500).json({ message: err.message });
@@ -44,7 +44,7 @@ class BlogsController {
   // update blog
   static async updateBlog(req, res) {
     try {
-      const { id, title, thumbnailImage, requirements } = req.body;
+      const { id, photo, name, designation, testimonial } = req.body;
 
       if (!id) {
         res.status(400).json({ message: "Id is required" });
@@ -57,12 +57,12 @@ class BlogsController {
 
       const result = await BlogsModel.findOneAndUpdate(
         { _id: id },
-        { title, thumbnailImage, requirements },
+        { photo, name, designation, testimonial },
         { new: true, runValidators: true }
       );
 
       res.status(400).json({
-        message: "Blogs updated successfully",
+        message: "Blog updated successfully",
         data: result,
       });
     } catch (err) {
@@ -85,6 +85,10 @@ class BlogsController {
       }
 
       const result = await BlogsModel.findOneAndDelete({ _id: id });
+
+      if (!result) {
+        return res.status(404).json({ message: "Blog not found" });
+      }
 
       res.status(200).json({
         message: "Blog deleted successfully",

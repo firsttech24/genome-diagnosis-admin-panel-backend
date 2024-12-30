@@ -26,3 +26,10 @@ const ContactUsDetailsModel = mongoose.model(
 );
 
 export default ContactUsDetailsModel;
+
+/* 
+    name: "",
+    email: "",
+    message: "",
+
+*/

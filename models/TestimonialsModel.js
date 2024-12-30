@@ -11,3 +11,13 @@ const TestimonialsSchema = mongoose.Schema({
 const TestimonialsModel = mongoose.model("testimonial", TestimonialsSchema);
 
 export default TestimonialsModel;
+
+/* 
+  const form = {
+    photo : "",
+    name : "",
+    designation : "",
+    comment: "",
+  };
+
+*/

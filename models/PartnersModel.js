@@ -8,3 +8,13 @@ const PartnersSchema = mongoose.Schema({
 const PartnersModel = mongoose.model("partner", PartnersSchema);
 
 export default PartnersModel;
+
+/* 
+   const form = {
+    photo : "",
+    name : "",
+    timeline : "",
+    description: "",
+  };
+
+*/

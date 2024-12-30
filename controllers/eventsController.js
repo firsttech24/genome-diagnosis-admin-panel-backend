@@ -108,6 +108,10 @@ class EventsController {
 
       const result = await EventsModel.findOneAndDelete({ _id: id });
 
+      if (!result) {
+        return res.status(404).json({ message: "Event not found" });
+      }
+
       res.status(200).json({
         message: "Event deleted successfully",
         data: result,

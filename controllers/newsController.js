@@ -91,6 +91,10 @@ class NewsController {
 
       const result = await NewsModel.findOneAndDelete({ _id: id });
 
+      if (!result) {
+        return res.status(404).json({ message: "News not found" });
+      }
+
       res.status(200).json({
         message: "News deleted successfully",
         data: result,

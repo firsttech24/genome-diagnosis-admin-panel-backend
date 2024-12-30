@@ -128,6 +128,10 @@ class CareersController {
 
       const result = await CareersModel.findOneAndDelete({ _id: id });
 
+      if (!result) {
+        return res.status(404).json({ message: "Career not found" });
+      }
+
       res.status(200).json({
         message: "Career deleted successfully",
         data: result,
