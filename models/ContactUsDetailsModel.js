@@ -1,23 +1,9 @@
 import mongoose from "mongoose";
 
 const ContactUsDetailsSchema = mongoose.Schema({
-  phoneNumber: {
-    type: String,
-    required: true,
-    trim: true,
-    unique: true,
-    validate: {
-      validator: (value) => {
-        return /^\+?\d{10,15}$/.test(value);
-      },
-      message: (props) => `${props.value} is not a valid phone number!`,
-    },
-  },
-  address: {
-    type: String,
-    required: true,
-    trim: true,
-  },
+  name: { type: String, required: true, trim: true },
+  email: { type: String, required: true, trim: true },
+  message: { type: String, required: true, trim: true },
 });
 
 const ContactUsDetailsModel = mongoose.model(
@@ -26,10 +12,3 @@ const ContactUsDetailsModel = mongoose.model(
 );
 
 export default ContactUsDetailsModel;
-
-/* 
-    name: "",
-    email: "",
-    message: "",
-
-*/

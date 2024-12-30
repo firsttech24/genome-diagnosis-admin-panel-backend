@@ -10,14 +10,16 @@ class ContactUsDetailsController {
 
       // create contact us details if no data is there
       if (contactUsDetails === null) {
-        const phoneNumber = "1800000000";
-        const address = "Gomti Nagar Lucknow 226010Address";
+        const name = "Genome Diagnosis";
+        const email = "genomediagnosis@gmail.com";
+        const message = "Gomti Nagar Lucknow 226010";
+
         contactUsDetails = new ContactUsDetailsModel({
-          phoneNumber,
-          address,
+          name,
+          email,
+          message,
         });
         await contactUsDetails.save();
-        console.log("Contact us details created successfully");
       }
       res.status(200).json({
         message: "Contact us details retrieved successfully.",
@@ -31,7 +33,7 @@ class ContactUsDetailsController {
   // update contact us details
   static async updateContactUsDetails(req, res) {
     try {
-      const { id, phoneNumber, address } = req.body;
+      const { id, name, email, message } = req.body;
 
       if (!id) {
         res.status(400).json({ message: "Id is required" });
@@ -44,7 +46,7 @@ class ContactUsDetailsController {
 
       const contactUsDetails = await ContactUsDetailsModel.findOneAndUpdate(
         { _id: id },
-        { phoneNumber, address },
+        { name, email, message },
         { new: true, runValidators: true }
       );
 
