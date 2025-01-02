@@ -10,3 +10,10 @@ const BlogsSchema = mongoose.Schema({
 const BlogsModel = mongoose.model("blog", BlogsSchema);
 
 export default BlogsModel;
+
+/* 
+  photo,
+  name,
+  editor,
+  description,
+*/

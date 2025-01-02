@@ -21,33 +21,24 @@ class TestimonialsController {
   // create testimonial
   static async createTestimonial(req, res) {
     try {
-      const { userName, userPhoto, testimonial, designation, companyName } =
-        req.body;
+      const { name, photo, designation, company, comment } = req.body;
 
-      if (
-        !userName ||
-        !userPhoto ||
-        !testimonial ||
-        !designation ||
-        !companyName
-      ) {
+      if (!name || !photo || !designation || !company || !comment) {
         res.status(400).json({ message: "All fields are required" });
         return;
       }
 
       const testimonialDetails = await TestimonialsModel.create({
-        userName,
-        userPhoto,
-        testimonial,
+        name,
+        photo,
         designation,
-        companyName,
+        company,
+        comment,
       });
-
-      const result = await testimonialDetails.save();
 
       res.status(200).json({
         message: "Testimonial created successfully",
-        data: result,
+        data: testimonialDetails,
       });
     } catch (err) {
       res.status(500).json({ message: err.message });
@@ -57,8 +48,7 @@ class TestimonialsController {
   // update testimonial
   static async updateTestimonial(req, res) {
     try {
-      const { id, userName, userPhoto, testimonial, designation, companyName } =
-        req.body;
+      const { id, name, photo, designation, company, comment } = req.body;
 
       if (!id) {
         res.status(400).json({ message: "Id is required" });
@@ -71,7 +61,7 @@ class TestimonialsController {
 
       const result = await TestimonialsModel.findOneAndUpdate(
         { _id: id },
-        { userName, userPhoto, testimonial, designation, companyName },
+        { name, photo, designation, company, comment },
         { new: true, runValidators: true }
       );
 
@@ -99,6 +89,10 @@ class TestimonialsController {
       }
 
       const result = await TestimonialsModel.findOneAndDelete({ _id: id });
+
+      if (!result) {
+        return res.status(404).json({ message: "Testimonial not found" });
+      }
 
       res.status(200).json({
         message: "Testimonial deleted successfully",
