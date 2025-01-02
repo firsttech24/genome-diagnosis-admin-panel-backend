@@ -10,13 +10,3 @@ const TeamSchema = mongoose.Schema({
 const TeamModel = mongoose.model("team", TeamSchema);
 
 export default TeamModel;
-
-/* 
-
-  const form = {
-    photo : "",
-    name : "",
-    designation : "",
-    description: "",
-  };
-*/

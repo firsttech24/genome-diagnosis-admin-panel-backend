@@ -21,42 +21,32 @@ class TeamController {
   // create team
   static async createTeam(req, res) {
     try {
-      const { name, designation, userPhoto, socialMediaLinks } = req.body;
+      const { name, photo, designation, description } = req.body;
 
-      if ((!name, !designation, !userPhoto, !socialMediaLinks)) {
+      if ((!name, !photo, !designation, !description)) {
         return res.status(400).json({ message: "All fields are required" });
-      }
-
-      const { insta, facebook, x, linkedin } = socialMediaLinks;
-      if (!insta || !facebook || !x || !linkedin) {
-        return res.status(400).json({
-          message:
-            "All social media links (insta, facebook, x, linkedin) are required",
-        });
       }
 
       const team = await TeamModel.create({
         name,
+        photo,
         designation,
-        userPhoto,
-        socialMediaLinks,
+        description,
       });
-
-      const result = await team.save();
 
       res.status(200).json({
         message: "Team created successfully",
-        data: result,
+        data: team,
       });
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
   }
 
-  //   update team
+  // update team
   static async updateTeam(req, res) {
     try {
-      const { id, name, designation, userPhoto, socialMediaLinks } = req.body;
+      const { id, name, photo, designation, description } = req.body;
 
       if (!id) {
         return res.status(400).json({ message: "Id is required" });
@@ -71,19 +61,14 @@ class TeamController {
         return res.status(404).json({ message: "Team not found" });
       }
 
-      const updatedSocialMediaLinks = {
-        ...existingTeam.socialMediaLinks,
-        ...socialMediaLinks,
-      };
-
       // Update the document
       const updatedTeam = await TeamModel.findOneAndUpdate(
         { _id: id },
         {
           name,
+          photo,
           designation,
-          userPhoto,
-          socialMediaLinks: updatedSocialMediaLinks,
+          description,
         },
         { new: true, runValidators: true }
       );
