@@ -19,17 +19,17 @@ class BlogsController {
   // create blog
   static async createBlog(req, res) {
     try {
-      const { photo, name, designation, testimonial } = req.body;
+      const { photo, name, editor, description } = req.body;
 
-      if (!photo || !name || !designation || !testimonial) {
+      if (!photo || !name || !editor || !description) {
         return res.status(400).json({ message: "All fields are required" });
       }
 
       const newBlog = await BlogsModel.create({
         photo,
         name,
-        designation,
-        testimonial,
+        editor,
+        description,
       });
 
       res.status(200).json({
@@ -44,7 +44,7 @@ class BlogsController {
   // update blog
   static async updateBlog(req, res) {
     try {
-      const { id, photo, name, designation, testimonial } = req.body;
+      const { id, photo, name, editor, description } = req.body;
 
       if (!id) {
         res.status(400).json({ message: "Id is required" });
@@ -57,7 +57,7 @@ class BlogsController {
 
       const result = await BlogsModel.findOneAndUpdate(
         { _id: id },
-        { photo, name, designation, testimonial },
+        { photo, name, editor, description },
         { new: true, runValidators: true }
       );
 
